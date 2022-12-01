@@ -18,3 +18,13 @@ resource "aws_eip_association" "eip_assoc" {
     allocation_id = aws_eip.ib.id
     
   }
+resource "aws_security_group" "mysecurity" {
+    name = "mysecuritygroup"
+
+    ingress {
+        from_port        = 443
+        to_port          = 443
+        protocol         = "tcp"
+        cidr_blocks      = ["${aws_eip.ib.public_ip}/32"]
+    }
+  }
